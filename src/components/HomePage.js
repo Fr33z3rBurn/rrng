@@ -27,7 +27,7 @@ export default class HomePage extends React.Component {
           <Row className="row justify-content-center">
             <Image src={logo} className="HomePage-logo" />
           </Row>
-          <Row className="row justify-content-center">
+          <Row className="row-6 justify-content-center">
             <Button onClick={() => this.getRandomRecipe()}>
               Give Me a Recipe!
             </Button>
