@@ -41,7 +41,7 @@ export default class HomePage extends React.Component {
     return (
       <Container>
         <Col className="col-12 justify-content-center">
-          <Row className="row justify-content-center">
+          <Row className="row">
             <h1>Recipe RNG</h1>
           </Row>
           <br></br>
@@ -50,11 +50,13 @@ export default class HomePage extends React.Component {
               <Image src={logo} className="HomePage-logo" />
             )}
           </Row>
-          <Row className="row justify-content-center">
+          <Row className="row">
             {this.state.recipe === null && (
+              <Col className="col-5">
               <Button onClick={() => this.getRandomRecipe()}>
                 Give Me A Recipe!
               </Button>
+              </Col>
             )}
           </Row>
         </Col>
