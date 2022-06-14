@@ -44,63 +44,89 @@ export default class HomePage extends React.Component {
           <Row className="row justify-content-center">
             <h1>Recipe RNG</h1>
           </Row>
+          <br></br>
           <Row className="row justify-content-center">
             {this.state.recipe === null && (
               <Image src={logo} className="HomePage-logo" />
             )}
           </Row>
-          <Row className="row-6 justify-content-center">
-            <Button onClick={() => this.getRandomRecipe()}>
-              Give Me a Recipe!
-            </Button>
+          <Row className="row justify-content-center">
+            {this.state.recipe === null && (
+              <Button onClick={() => this.getRandomRecipe()}>
+                Give Me A Recipe!
+              </Button>
+            )}
           </Row>
         </Col>
         {this.state.recipe !== null && (
           <div>
-            <h1>{this.state.recipe.strMeal}</h1>
-            <h3>Category: {this.state.recipe.strCategory}</h3>
-            <h3>Nationality: {this.state.recipe.strArea}</h3>
-            <img
-              src={this.state.recipe.strMealThumb}
-              className="img-fluid shadow-4"
-              alt="..."
-            />
-            <br></br>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Amount</th>
-                  <th>Ingredient</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.ingredients.map((nested) =>
-                  nested.map((element) => (
-                    <tr key={element.id}>
-                      <td>{element.amount}</td>
-                      <td>{element.ingredient}</td>
+            <Row>
+              <Col className="col-5">
+                <img
+                  src={this.state.recipe.strMealThumb}
+                  className="img-fluid shadow-4"
+                  alt="..."
+                />
+                <p>
+                  <strong>Category:</strong> {this.state.recipe.strCategory}
+                </p>
+                <p>
+                  <strong>Nationality:</strong> {this.state.recipe.strArea}
+                </p>
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Amount</th>
+                      <th>Ingredient</th>
                     </tr>
-                  ))
+                  </thead>
+                  <tbody>
+                    {this.state.ingredients.map((nested) =>
+                      nested.map((element) => (
+                        <tr key={element.id}>
+                          <td>{element.amount}</td>
+                          <td>{element.ingredient}</td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </Table>
+              </Col>
+              <Col className="col-7">
+                <h1>{this.state.recipe.strMeal}</h1>
+                <p>{this.state.recipe.strInstructions}</p>
+                {this.state.recipe.strYoutube !== "" && (
+                  <div
+                    className="video"
+                    style={{
+                      position: "relative",
+                      paddingBottom: "56.25%" /* 16:9 */,
+                      paddingTop: 25,
+                      height: 0,
+                    }}
+                  >
+                    <iframe
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      src={
+                        "https://www.youtube.com/embed/" +
+                        this.state.recipe.strYoutube.slice(-11)
+                      }
+                      frameBorder="0"
+                    />
+                  </div>
                 )}
-              </tbody>
-            </Table>
-
-            <p>{this.state.recipe.strInstructions}</p>
-
-            {this.state.recipe.strYoutube !== "" && (
-              <iframe
-                width="420"
-                height="315"
-                src={
-                  "https://www.youtube.com/embed/" +
-                  this.state.recipe.strYoutube.slice(-11)
-                }
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-                title="video"
-              />
-            )}
+                <br></br>
+                <Button onClick={() => this.getRandomRecipe()}>
+                  Give Me A Recipe!
+                </Button>
+              </Col>
+            </Row>
           </div>
         )}
       </Container>
